@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "Subtotal",
+    "enabled": true,
+    "assertion": "subtotal",
+    "figure": "$306.47"
+  },
+  {
+    "id": 2,
+    "name": "Discount",
+    "enabled": true,
+    "assertion": "discount",
+    "figure": "-$30.65"
+  },
+  {
+    "id": 3,
+    "name": "Discounted Subtotal",
+    "enabled": true,
+    "assertion": "discountedSubtotal",
+    "figure": "$275.82"
+  },
+  {
+    "id": 4,
+    "name": "Tax",
+    "enabled": true,
+    "assertion": "tax",
+    "figure": "$22.07"
+  },
+  {
+    "id": 5,
+    "name": "Total",
+    "enabled": true,
+    "assertion": "total",
+    "figure": "$302.89"
+  }
+]
