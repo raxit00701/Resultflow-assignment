@@ -157,50 +157,6 @@ allure open .\allure-report
 
 ---
 
-## 🔄 Continuous Integration (Jenkins)
-
-This framework is designed for seamless integration with Jenkins pipelines to support daily smoke or regression runs.
-
-**Sample `Jenkinsfile` snippet:**
-
-```groovy
-pipeline {
-    agent any
-    environment {
-        HEADLESS = 'true'
-        TEST_MODE = 'parallel'
-        ENV = 'staging'
-    }
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-        stage('Install Dependencies') {
-            steps {
-                sh 'npm ci'
-                sh 'npx playwright install --with-deps'
-            }
-        }
-        stage('Run E-Commerce Automation') {
-            steps {
-                sh 'npx playwright test --project=chrome'
-            }
-        }
-    }
-    post {
-        always {
-            allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
-            archiveArtifacts artifacts: 'playwright-report/**/*', allowEmptyArchive: true
-        }
-    }
-}
-
-```
-
----
-
 ## 🐛 Current Defect Tracking
 
 The suite is currently acting as an active bug-catcher. Recent runs have identified **8 product and test defects**, including:
