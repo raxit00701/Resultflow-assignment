@@ -155,19 +155,4 @@ allure open .\allure-report
 
 ```
 
----
 
-## 🐛 Current Defect Tracking
-
-The suite is currently acting as an active bug-catcher. Recent runs have identified **8 product and test defects**, including:
-
-1. **Inventory Bypass:** Out-of-stock items can be added to the cart.
-2. **Cart Calculation Errors:** Discrepancies between expected total calculations and the UI rendered totals.
-3. **Validation Failures:** The checkout form is accepting invalid email formats (e.g., `emilydavis@.....com`).
-4. **UI Rendering:** Negative zero formatting issues on discount application (`-$0.00`).
-
-```
-
-Would you like me to include guidelines on how team members should structure new test data in the JSON files, or details on how to use AI-generated snippets to scale this framework further?
-
-```
