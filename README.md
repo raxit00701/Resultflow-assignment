@@ -1,6 +1,4 @@
-Here is an expanded version of the `README.mdx` file. I have added deeper technical details, including prerequisite setup, installation instructions, a more granular project structure, and a section on Continuous Integration (specifically tailored for Jenkins, to match enterprise-level CI/CD workflows often paired with this stack).
 
-```mdx
 # E-Commerce Playwright Automation Framework
 
 A robust, scalable test automation framework built to validate core e-commerce functionalities. Developed with **Playwright** and **TypeScript**, this framework emphasizes data-driven testing (DDT), dynamic configuration, and comprehensive cart mathematics validation.
