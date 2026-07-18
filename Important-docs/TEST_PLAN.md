@@ -222,5 +222,202 @@ StoreFront Application/
 │
 ├── playwright.config.ts
 └── package.json
+You can add a new section to your **TEST_PLAN.md / TEST_PLAN.mdx** explaining the test suite grouping and how it maps to your Playwright configuration. This fits naturally after **Section 13 – Automation Scope & Mapping**.
+
+---
+
+## 15. Test Suite Organization
+
+To improve execution efficiency and support CI/CD pipelines, automated tests are organized into logical suites using **Playwright tags/groups**. This allows testers to execute only the required subset of tests instead of running the entire regression suite.
+
+### Smoke Test Suite
+
+**Purpose:** Validate that the application is stable enough for further testing by executing only the most business-critical user journeys.
+
+**Coverage**
+
+* Application launches successfully.
+* Home page loads without errors.
+* Product listing is displayed.
+* User can add a product to the cart.
+* Cart page is accessible.
+* Checkout page opens successfully.
+
+**Execution**
+
+```powershell
+$env:GROUP="smoke"
+npx playwright test
+```
+
+or
+
+```bash
+GROUP=smoke npx playwright test
+```
+
+---
+
+### Sanity Test Suite
+
+**Purpose:** Validate newly modified or high-risk functionality after a bug fix or feature enhancement.
+
+**Coverage**
+
+* Inventory validation.
+* Cart badge updates correctly.
+* Product quantity changes.
+* Checkout form validation.
+* Discount code validation.
+
+**Execution**
+
+```powershell
+$env:GROUP="sanity"
+npx playwright test
+```
+
+---
+
+### Regression Test Suite
+
+**Purpose:** Execute the complete automated regression suite to ensure existing functionality continues to work after code changes.
+
+**Coverage**
+
+* Product listing.
+* Inventory validation.
+* Cart operations.
+* Pricing calculations.
+* Discount calculations.
+* Checkout workflows.
+* Order confirmation.
+* Mathematical validations.
+* Data-driven checkout scenarios.
+
+**Execution**
+
+```powershell
+$env:GROUP="reg"
+npx playwright test
+```
+
+---
+
+## 16. Playwright Test Grouping
+
+The Playwright framework supports executing tests by logical groups through the `GROUP` environment variable configured in `playwright.config.ts`.
+
+Current supported groups include:
+
+| Group    | Purpose                                    |
+| -------- | ------------------------------------------ |
+| `smoke`  | Critical functionality validation          |
+| `sanity` | Validate recent fixes or high-risk modules |
+| `reg`    | Full regression suite                      |
+| `api`    | API-related tests (future expansion)       |
+| `data`   | Data-driven validation tests               |
+| `all`    | Execute every automated test (default)     |
+
+If no `GROUP` environment variable is specified, Playwright automatically executes the complete automation suite.
+
+Example executions:
+
+```powershell
+# Run Smoke Suite
+$env:GROUP="smoke"
+npx playwright test
+
+# Run Sanity Suite
+$env:GROUP="sanity"
+npx playwright test
+
+# Run Regression Suite
+$env:GROUP="reg"
+npx playwright test
+
+# Run Complete Suite
+Remove-Item Env:GROUP
+npx playwright test
+```
+
+---
+
+### Test Tagging Strategy
+
+Each Playwright test is categorized using logical tags to support selective execution.
+
+Example:
+
+```typescript
+test.describe('@smoke Product Listing', () => {
+
+    test('@smoke Home page loads successfully', async ({ page }) => {
+        // test
+    });
+
+});
+```
+
+```typescript
+test.describe('@sanity Cart Validation', () => {
+
+    test('@sanity Quantity updates correctly', async ({ page }) => {
+        // test
+    });
+
+});
+```
+
+```typescript
+test.describe('@reg Checkout Flow', () => {
+
+    test('@reg Complete checkout journey', async ({ page }) => {
+        // test
+    });
+
+});
+```
+
+This grouping strategy enables:
+
+* Faster smoke validation before deployments.
+* Focused sanity verification after defect fixes.
+* Complete regression execution during release validation.
+* Easy integration with Jenkins and CI/CD pipelines.
+* Selective execution through Playwright environment variables without modifying test code.
+
+---
+
+### Small correction for your Playwright config
+
+Your config currently defines:
+
+```ts
+type GroupKey = 'reg' | 'api' | 'smoke' | 'data' | 'Sanity' | 'all';
+```
+
+and later:
+
+```ts
+const activeGroup = ((process.env.GROUP ?? 'all') as GroupKey).toLowerCase() as GroupKey;
+```
+
+Since you're converting the value to lowercase, the type should also use lowercase:
+
+```ts
+type GroupKey = 'reg' | 'api' | 'smoke' | 'sanity' | 'data' | 'all';
+
+const TEST_GROUPS = {
+  reg: './tests/**/*.spec.ts',
+  smoke: './tests/**/*.spec.ts',
+  sanity: './tests/**/*.spec.ts',
+  api: './tests/**/*.spec.ts',
+  data: './tests/**/*.spec.ts',
+};
+```
+
+This keeps the environment variable (`GROUP=sanity`) consistent with the documentation and avoids the mismatch between `Sanity` and `sanity`.
+
 
 ```
