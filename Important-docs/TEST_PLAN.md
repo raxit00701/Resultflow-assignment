@@ -58,7 +58,7 @@ The following are outside the scope of this assignment:
 | **Language** | TypeScript |
 | **Test Data** | JSON (Data-Driven Testing via `checkout.json`, `matric.json`) |
 | **Reporting** | Allure Reporter, Playwright HTML |
-| **CI/CD** | Jenkins |
+
 
 ---
 
