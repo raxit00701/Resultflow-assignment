@@ -1,7 +1,7 @@
 
-# E-Commerce Playwright Automation Framework
+# Storefront Web Application Playwright Automation Framework
 
-A robust, scalable test automation framework built to validate core e-commerce functionalities. Developed with **Playwright** and **TypeScript**, this framework emphasizes data-driven testing (DDT), dynamic configuration, and comprehensive cart mathematics validation.
+A robust, scalable test automation framework built to validate core Storefront Web Application functionalities. Developed with **Playwright** and **TypeScript**, this framework emphasizes data-driven testing (DDT), dynamic configuration, and comprehensive cart mathematics validation.
 
 ## 🛠️ Tech Stack
 
