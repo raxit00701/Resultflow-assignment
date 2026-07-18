@@ -87,14 +87,14 @@ const allureReporter: [string, object] = [
 //  Leave GROUP unset (or set to "all") to run every test as usual.
 // ─────────────────────────────────────────────
 
-type GroupKey = 'reg' | 'api' | 'smoke' | 'data' | 'gen' | 'all';
+type GroupKey = 'reg' | 'api' | 'smoke' | 'data' | 'Sanity' | 'all';
 
 const TEST_GROUPS: Record<Exclude<GroupKey, 'all'>, string> = {
     reg: 'tests/**/*.spec.ts',
     api:  'tests/**/*.spec.ts',
     smoke:  'tests/**/*.spec.ts',
     data: 'tests/**/*.spec.ts',
-    gen:  'tests/**/*.spec.ts',
+    Sanity:  'tests/**/*.spec.ts',
 };
 
 const activeGroup = ((process.env.GROUP ?? 'all') as GroupKey).toLowerCase() as GroupKey;
